@@ -7,11 +7,20 @@ services:
     volumes:
       - rabbitmq_data:/data
 
-  # rabbitmq-admin:
-  #   image: rabbitmq:management
-
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: my-commerce-admin
+      POSTGRES_DB: my-commerce-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
 networks:
   my-commerce:
 
 volumes:
   rabbitmq_data:
+  pg_data:
